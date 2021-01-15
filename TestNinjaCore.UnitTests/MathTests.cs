@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 using TestNinjaCore.Fundamentals;
 
@@ -106,6 +107,41 @@ namespace TestNinjaCore.UnitTests
             var result = _math.Max(a, b);
 
             Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        // use black box technique
+        // input is an int
+        // an int can be 0, <0 (negative), or >0 (positive)
+        // that's three scenarios right there
+        [Test]
+        public void GetOddNumbers_LimitIsGreaterThanZero_ReturnOddNumbersUpToLimit()
+        {
+            var result = _math.GetOddNumbers(5);
+
+            // most general
+            // can have any numbers
+            // if you don't care about the values, this is ok
+            Assert.That(result, Is.Not.Empty);
+
+            // more specific
+            // test number of items in array
+            Assert.That(result.Count(), Is.EqualTo(3));
+
+            // even more specific
+            // check for existing of certain items
+            // but don't care about order
+            Assert.That(result, Does.Contain(1));
+            Assert.That(result, Does.Contain(3));
+            Assert.That(result, Does.Contain(5));
+
+            // shorter and cleaner
+            // this makes sure all items are in the result array
+            // this is preferred way
+            Assert.That(result, Is.EquivalentTo(new [] {1, 3, 5}));
+
+            // useful assertations
+            Assert.That(result, Is.Ordered);
+            Assert.That(result, Is.Unique); // make sure no duplicate items in array
         }
     }
 }
