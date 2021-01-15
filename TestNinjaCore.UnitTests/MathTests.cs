@@ -50,13 +50,17 @@ namespace TestNinjaCore.UnitTests
         //     Assert.That(result, Is.EqualTo(2));
         // }
 
-        // [Test]
-        // public void Max_SecondArgumentIsGreater_ReturnTheSecondArgument()
-        // {
-        //     var result = _math.Max(1, 2);
+        // we should delete or comment out tests
+        // because there was a reason for the test
+        // instead use the Ignore attribute
+        [Test]
+        [Ignore("Because I wanted to!")]
+        public void Max_SecondArgumentIsGreater_ReturnTheSecondArgument()
+        {
+            var result = _math.Max(1, 2);
 
-        //     Assert.That(result, Is.EqualTo(2));
-        // }
+            Assert.That(result, Is.EqualTo(2));
+        }
 
         // // good start is stubbing out methods based on execution paths
         // // but should also take into account the types of data that can go into
