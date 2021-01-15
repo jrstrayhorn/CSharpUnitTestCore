@@ -8,10 +8,10 @@ namespace TestNinjaCore.Fundamentals
 
         public event EventHandler<Guid> ErrorLogged; 
         
-        // how many test cases?
-        // 3
         public void Log(string error)
         {
+            // how many test cases?
+            // 3
             // null check
             // ""
             // " "

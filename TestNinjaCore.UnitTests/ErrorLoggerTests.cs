@@ -34,5 +34,21 @@ namespace TestNinjaCore.UnitTests
             // Assert.That(() => logger.Log(error), Throws.Exception.TypeOf<DivideByZeroException>());
             
         }
+
+        [Test]
+        public void Log_ValidError_RaiseErrorLoggedEvent()
+        {
+            var logger = new ErrorLogger();
+
+            // how can we verify event was raised
+            // before acting need to subscribe to event
+            // the lamba is the event handler
+            var id = Guid.Empty;
+            logger.ErrorLogged += (sender, args) => { id = args; };
+
+            logger.Log("a");
+
+            Assert.That(id, Is.Not.EqualTo(Guid.Empty));
+        }
     }
 }
