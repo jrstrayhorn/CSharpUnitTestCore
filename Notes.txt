@@ -79,6 +79,22 @@ Fundamentals of Unit Testing
 - Reservation_CanBeCancelledByTests (class with all testMethods for CanBeCancelled method)
 or Reservation (folder) / CanBeCancelledByTests (class w/ testMethods)
 
+Writing Trustworthy Tests
+- this is a goood best practice
+- what?
+- a test we can rely upon
+- if tests pass, we KNOW our production code works
+- if tests fail, we KNOW our production code doesn't work
+- how?
+    - 1. use TDD
+        - start with failing test
+        - write simplest code to make the test pass
+        - this is complex in real world
+    - 2. Code First, Test Later
+        - might have a passed test but still bugs in production code
+        - these can be untrustworthy test
+
+
 
     
 

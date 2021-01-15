@@ -8,6 +8,8 @@ namespace TestNinjaCore.Fundamentals
         public int Add(int a, int b)
         { 
             return a + b;
+            // return 0; // this line supposed to make test pass
+            // return 1;
         }
         
         // have 2 execution paths based on condition

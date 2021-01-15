@@ -38,6 +38,21 @@ namespace TestNinjaCore.UnitTests
             var result = _math.Add(1, 2);
 
             Assert.That(result, Is.EqualTo(3));
+
+            // should always pass
+            // when you write test later, might make a mistake
+            // this is nto testing the right thing
+            // this is not a trust worthy test because even though it pass
+            // we still have a bug - it's not testing the right thing
+            // how to prevent this???
+            // go to production code, make a change to code that's supposed to make it pass
+            // essentially create a bug, if test still passes then its not trust worthy
+            // this means the test has a bug
+            // Assert.That(_math, Is.Not.Null); 
+
+            // when run test and pass
+            // go to production code, and make a change (create a bug)
+            // if test still pass then it's not testing the right thing!
         }
 
         // // good practice to write the method stubs w/ scenario and expected behavior
