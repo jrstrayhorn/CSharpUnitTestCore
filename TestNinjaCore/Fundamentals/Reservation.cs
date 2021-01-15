@@ -7,17 +7,20 @@ namespace TestNinjaCore.Fundamentals
 
         public bool CanBeCancelledBy(User user)
         {
-            // 3 scenarios - execution paths
-            // Scenario #1 - when user isAdmin
-            if (user.IsAdmin)
-                return false;
+            // // 3 scenarios - execution paths
+            // // Scenario #1 - when user isAdmin
+            // if (user.IsAdmin)
+            //     return true;
 
-            // Scenario #2 - when user is MadeBy user or person who made reservation
-            if (MadeBy == user)
-                return true;
+            // // Scenario #2 - when user is MadeBy user or person who made reservation
+            // if (MadeBy == user)
+            //     return true;
 
-            // Scenario #3 - when user is someone else trying to cancel
-            return false;
+            // // Scenario #3 - when user is someone else trying to cancel
+            // return false;
+
+            // refactored
+            return (user.IsAdmin || MadeBy == user);
         }
         
     }
