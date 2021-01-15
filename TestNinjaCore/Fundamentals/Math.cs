@@ -10,6 +10,8 @@ namespace TestNinjaCore.Fundamentals
             return a + b;
         }
         
+        // have 2 execution paths based on condition
+        // number of tests >= number of execution paths
         public int Max(int a, int b)
         {
             return (a > b) ? a : b;
