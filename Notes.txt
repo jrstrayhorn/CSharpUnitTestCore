@@ -106,6 +106,8 @@ or Reservation (folder) / CanBeCancelledByTests (class w/ testMethods)
 - when you test private members - tests are coupled to implementation details
 - these tests are brittle and will slow you down!!
 
+===Code Coverage
+
 
 
     
