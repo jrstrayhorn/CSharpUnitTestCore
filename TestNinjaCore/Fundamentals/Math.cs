@@ -4,6 +4,7 @@ namespace TestNinjaCore.Fundamentals
 {
     public class Math
     {
+        // only have 1 execution path
         public int Add(int a, int b)
         { 
             return a + b;
