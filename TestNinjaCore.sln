@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNinjaCore", "TestNinjaCore\TestNinjaCore.csproj", "{9FFF32D2-93FA-490D-9AA7-07928C5DC661}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNinjaCore.UnitTests", "TestNinjaCore.UnitTests\TestNinjaCore.UnitTests.csproj", "{44B37890-B0F4-442B-BB7A-69D805B8DF5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{9FFF32D2-93FA-490D-9AA7-07928C5DC661}.Release|x64.Build.0 = Release|Any CPU
 		{9FFF32D2-93FA-490D-9AA7-07928C5DC661}.Release|x86.ActiveCfg = Release|Any CPU
 		{9FFF32D2-93FA-490D-9AA7-07928C5DC661}.Release|x86.Build.0 = Release|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Debug|x64.Build.0 = Debug|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Debug|x86.Build.0 = Debug|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Release|x64.ActiveCfg = Release|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Release|x64.Build.0 = Release|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Release|x86.ActiveCfg = Release|Any CPU
+		{44B37890-B0F4-442B-BB7A-69D805B8DF5D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
