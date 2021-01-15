@@ -6,14 +6,36 @@ namespace TestNinjaCore.UnitTests
     [TestFixture]
     public class MathTests
     {
+        // don't do this
+        // don't share state across state because it can leak
+        // no singletons, should create a new instance each time
+        // a test is being ran
+        private Math _math;
+
+        // SetUp - method will call method before running each test
+        // can init object here
+        [SetUp]
+        public void SetUp()
+        {
+            _math = new Math();
+        }
+
+        // TearDown - method will call after each test
+        // often used with integration test
+        // might create data in db and want to clean up after each test
+
         // using WhenCalled because scenario is generic or happens everytime
         [Test]
         public void Add_WhenCalled_ReturnTheSumOfArguments()
         {
-            var math = new Math();
+            // each test should run/work like its the only test in the world
+            // so no sharing or getting state from other tests
+            // each test should start with a fresh and clean state
+            // but we shouldn't repeat ourselves - DRY
+            // var math = new Math();
 
             // use simple numbers as these numbers don't have a meaning
-            var result = math.Add(1, 2);
+            var result = _math.Add(1, 2);
 
             Assert.That(result, Is.EqualTo(3));
         }
@@ -23,9 +45,7 @@ namespace TestNinjaCore.UnitTests
         [Test]
         public void Max_FirstArgumentIsGreater_ReturnTheFirstArgument()
         {
-            var math = new Math();
-
-            var result = math.Max(2, 1);
+            var result = _math.Max(2, 1);
 
             Assert.That(result, Is.EqualTo(2));
         }
@@ -33,9 +53,7 @@ namespace TestNinjaCore.UnitTests
         [Test]
         public void Max_SecondArgumentIsGreater_ReturnTheSecondArgument()
         {
-            var math = new Math();
-
-            var result = math.Max(1, 2);
+            var result = _math.Max(1, 2);
 
             Assert.That(result, Is.EqualTo(2));
         }
@@ -52,9 +70,7 @@ namespace TestNinjaCore.UnitTests
         [Test]
         public void Max_ArgumentsAreEqual_ReturnTheSameArgument()
         {
-            var math = new Math();
-
-            var result = math.Max(1, 1);
+            var result = _math.Max(1, 1);
 
             Assert.That(result, Is.EqualTo(1));
         }
