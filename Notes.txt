@@ -1,0 +1,85 @@
+Fundamentals of Unit Testing
+
+====Characteristics of good unit tests
+- First-class citizens
+    - as important as production code
+- should be clean, readable, maintainable
+    - each test should have a single responsibility
+    - each test should be no more than 10 lines of code
+    - fails because test are large, fat and messy
+    - spend too much time debugging test
+    - refactor as necessary
+- No logic
+    - no if, else, foreach
+    - no conditional logic or loops
+    - why? when you have logic could make a mistake
+    - have a bug in test instead of production
+    - just call method and test assertion
+- Isolated
+    - each test runs like its the only test in the world
+    - should not call other methods or assume state from another test
+- Not too specific/general
+    - too general - no confidence
+
+====What to Test and What Not to Test
+- if don't know what to test, probably have untestable code
+- if methods are too fat, doing too many things, again tough to test
+- Unit Testing and Clean Code go hand in hand
+    - Testable Code is clean
+    - Clean code is Testable
+    - properly structured
+- Test the outcome of a function/method
+- Query vs Command
+- Query
+    - return some value
+    - test should verify that returns the right value
+    - if method has multiple execution paths, you should test all of those paths
+        and make sure each path returns the right values
+- Command
+    - does an action
+    - changes state, calls web service, connects to database
+    - send a message to message queue
+    - these methods are making a change in the system
+    - these might return a value as well
+    - example: 
+        method creates a new order object, 
+        saves to database,
+        returns new order object with unique id
+    - should test the outcome of the method
+    - if object state has changed, should test that object state has changed correctly
+    - if outcome is to an external resource, should verify that the right call is being made to external dependency
+- What NOT to test
+    - Language features
+        - example: DTOs w/ just properties shouldn't be tested
+        - like C#
+    - 3rd-party code
+        - Don't write tests for Entity framework
+        - Dapper
+        - just test your code!!
+
+====Naming and Organizing Tests
+- Test Projects
+    - TestNinja
+    - TestNinja.UnitTests (run fast locally)
+    - TestNinja.IntegrationTests (run just before code commit)
+- Test class for each class in code because
+    - Reservation
+    - ReservationTests
+- Test methods
+    - Number of Tests >= Number of Execution paths
+    - name of tests should clearly state the business logic being tested
+- Bad Tests
+    - Test1, SavecustomerTest
+- Test methods
+    - MethodName_Scenario_ExpectedBehavior
+    - should be able to look at the name of a test and tell what business rule is being tested
+- if method is really complicated, with lots of execution paths MethodName_Scenario_ExpectedBehavior
+    - it might be best to have a separate class for the method
+    - other wise tests might pollute test class
+- Reservation_CanBeCancelledByTests (class with all testMethods for CanBeCancelled method)
+or Reservation (folder) / CanBeCancelledByTests (class w/ testMethods)
+
+
+    
+
+
