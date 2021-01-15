@@ -79,7 +79,7 @@ Fundamentals of Unit Testing
 - Reservation_CanBeCancelledByTests (class with all testMethods for CanBeCancelled method)
 or Reservation (folder) / CanBeCancelledByTests (class w/ testMethods)
 
-Writing Trustworthy Tests
+===Writing Trustworthy Tests
 - this is a goood best practice
 - what?
 - a test we can rely upon
@@ -93,6 +93,18 @@ Writing Trustworthy Tests
     - 2. Code First, Test Later
         - might have a passed test but still bugs in production code
         - these can be untrustworthy test
+        - so to ensure trustworthy test, comment out line that is being tested
+        - if test still passes, not a trustworthy test
+
+===Testing Private Methods
+- You shouldn't test private methods!
+- as these are implementation details
+- The public api/interface is what we should test
+- what's inside the black box should not be tested as this can be changed
+- few public methods (public api - interface of classes)
+- private/protected members (implementation detail)
+- when you test private members - tests are coupled to implementation details
+- these tests are brittle and will slow you down!!
 
 
 

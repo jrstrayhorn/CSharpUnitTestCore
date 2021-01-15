@@ -50,5 +50,17 @@ namespace TestNinjaCore.UnitTests
 
             Assert.That(id, Is.Not.EqualTo(Guid.Empty));
         }
+
+        // [Test]
+        // public void OnErrorLogged_WhenCalled_RaiseEvent()
+        // {
+        //     var logger = new ErrorLogger();
+
+        //     // now the tests break
+        //     // now tests break again when refactoring!!
+        //     logger.OnErrorLogged(Guid.NewGuid());
+
+        //     Assert.That(true);
+        // }
     }
 }
