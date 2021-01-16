@@ -94,6 +94,14 @@ Writing Trustworthy Tests
         - might have a passed test but still bugs in production code
         - these can be untrustworthy test
 
+=== How to know have enough tests?
+- Code Coverage Tools!
+- VS Enterprise Edition
+- ReSharper Ultimate - dotcover
+- NCover
+- should test not just execution paths/implementation, but like black box
+- what are the different types of inputs that can be used
+
 
 
     
