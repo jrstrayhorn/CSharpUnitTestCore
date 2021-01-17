@@ -102,6 +102,13 @@ Writing Trustworthy Tests
 - should test not just execution paths/implementation, but like black box
 - what are the different types of inputs that can be used
 
+=== When to test?
+- on legacy code that was not written to be Testable
+- work small, refactor and make Testable
+- test the most critical pieces first
+- test the key parts of the app or parts that think alot
+- test the parts that break alot
+- unit testing goes hand in hand with clean code!!!!
 
 
     
