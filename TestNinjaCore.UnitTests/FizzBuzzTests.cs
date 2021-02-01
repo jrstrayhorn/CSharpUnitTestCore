@@ -22,15 +22,33 @@ namespace TestNinjaCore.UnitTests
         }
 
         [Test]
-        public void GetOutput_WhenNumberIsMultipleOfJustFive_ReturnBuzz()
-        {}
+        [TestCase(5, "Buzz")]
+        [TestCase(5, "Buzz")]
+        public void GetOutput_WhenNumberIsMultipleOfJustFive_ReturnBuzz(int a, string expectedResult)
+        {
+            var result = FizzBuzz.GetOutput(a);
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
 
         [Test]
-        public void GetOutput_WhenNumberIsMultipleOfThreeAndFive_ReturnFizzBuzz()
-        {}
+        [TestCase(15, "FizzBuzz")]
+        [TestCase(15, "FizzBuzz")]
+        public void GetOutput_WhenNumberIsMultipleOfThreeAndFive_ReturnFizzBuzz(int a, string expectedResult)
+        {
+            var result = FizzBuzz.GetOutput(a);
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
 
         [Test]
-        public void GetOutput_WhenNumberIsNotMultipleOfThreeOrFive_ReturnNumber()
-        {}
+        [TestCase(2, "2")]
+        [TestCase(4, "4")]
+        public void GetOutput_WhenNumberIsNotMultipleOfThreeOrFive_ReturnNumber(int a, string expectedResult)
+        {
+            var result = FizzBuzz.GetOutput(a);
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
     }
 }
