@@ -23,7 +23,7 @@ namespace TestNinjaCore.UnitTests
 
         [Test]
         [TestCase(5, "Buzz")]
-        [TestCase(5, "Buzz")]
+        [TestCase(-5, "Buzz")]
         public void GetOutput_WhenNumberIsMultipleOfJustFive_ReturnBuzz(int a, string expectedResult)
         {
             var result = FizzBuzz.GetOutput(a);
@@ -33,7 +33,7 @@ namespace TestNinjaCore.UnitTests
 
         [Test]
         [TestCase(15, "FizzBuzz")]
-        [TestCase(15, "FizzBuzz")]
+        [TestCase(-15, "FizzBuzz")]
         public void GetOutput_WhenNumberIsMultipleOfThreeAndFive_ReturnFizzBuzz(int a, string expectedResult)
         {
             var result = FizzBuzz.GetOutput(a);
@@ -43,7 +43,7 @@ namespace TestNinjaCore.UnitTests
 
         [Test]
         [TestCase(2, "2")]
-        [TestCase(4, "4")]
+        [TestCase(-4, "-4")]
         public void GetOutput_WhenNumberIsNotMultipleOfThreeOrFive_ReturnNumber(int a, string expectedResult)
         {
             var result = FizzBuzz.GetOutput(a);
