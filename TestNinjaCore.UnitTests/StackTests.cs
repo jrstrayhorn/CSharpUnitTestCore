@@ -14,14 +14,22 @@ namespace TestNinjaCore.UnitTests
             _stack = new Stack<string>();
         }
 
+        // tests should only work with public api, interface
+        // not internal details
         [Test]
         public void Count_WhenAccessed_ReturnNumberOfItemsInStack()
         { 
-            _stack.Push("test");
+            _stack.Push("a");
 
             var count = _stack.Count;
 
             Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Count_EmptyStack_ReturnZero()
+        {
+            Assert.That(_stack.Count, Is.EqualTo(0));
         }
 
         [Test]
@@ -32,13 +40,11 @@ namespace TestNinjaCore.UnitTests
         }
 
         [Test]
-        public void Push_WhenCalled_ShouldAddItemToStack()
+        public void Push_WhenCalledWithValidArg_ShouldAddItemToStack()
         { 
-            _stack.Push("test");
+            _stack.Push("a");
 
-            var count = _stack.Count;
-
-            Assert.That(count, Is.EqualTo(1));
+            Assert.That(_stack.Count, Is.EqualTo(1));
         }
 
         [Test]
