@@ -16,39 +16,26 @@ namespace TestNinjaCore.UnitTests
         }
 
         [Test]
-        public void CalculateDemeritPoints_WhenSpeedIsLessThanZero_ThrowException()
+        [TestCase(-1)]
+        [TestCase(301)]
+        public void CalculateDemeritPoints_WhenSpeedIsOutOfRange_ThrowArgumentOutOfRangeException(int speed)
         { 
-            Assert.That(() => _calculator.CalculateDemeritPoints(-10), Throws.Exception.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => _calculator.CalculateDemeritPoints(speed), 
+                Throws.Exception.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
-        public void CalculateDemeritPoints_WhenSpeedIsGreaterThanMaxSpeed_ThrowException()
+        [TestCase(0, 0)]
+        [TestCase(64, 0)]
+        [TestCase(65, 0)]
+        [TestCase(66, 0)]
+        [TestCase(70, 1)]
+        [TestCase(75, 2)]
+        public void CalculateDemeritPoints_WhenCalled_ReturnDemeritPoints(int speed, int expectedResult)
         { 
-            Assert.That(() => _calculator.CalculateDemeritPoints(301), Throws.Exception.TypeOf<ArgumentOutOfRangeException>());
-        }
+            var points = _calculator.CalculateDemeritPoints(speed);
 
-        [Test]
-        public void CalculateDemeritPoints_WhenSpeedIsLessThanSpeedLimit_ReturnZero()
-        { 
-            var result = _calculator.CalculateDemeritPoints(20);
-
-            Assert.That(result, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void CalculateDemeritPoints_WhenSpeedIsEqualToSpeedLimit_ReturnZero()
-        { 
-            var result = _calculator.CalculateDemeritPoints(65);
-
-            Assert.That(result, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void CalculateDemeritPoints_WhenSpeedIsOverSpeedLimit_ReturnCorrectDemeritPoints()
-        { 
-            var result = _calculator.CalculateDemeritPoints(80);
-
-            Assert.That(result, Is.EqualTo(3));
+            Assert.That(points, Is.EqualTo(expectedResult));
         }
     }
 }
