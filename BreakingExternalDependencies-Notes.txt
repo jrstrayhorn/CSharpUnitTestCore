@@ -79,5 +79,24 @@ dependency injection - we inject dependency from the outside
         - we should be testing the external behavior NOT THE IMPLEMENTATION (because that can change over time!!)
     - prefer state-based, only use interaction when dealing with external resources
 
+==Fake as Little as Possible
+    - when you mock all dependecies you have problems
+        - explosion of interfaces - that serve no purposes
+        - explosion of constructor parameters - mocking dependency that don't need
+        - fat tests - b/c have so many mock objects
+        - fragile tests - tightly coupled to design - will break b/c don't test external 
+    - use mocks as little as Possible
+    - only deal with external resources - otherwise test slow, break often
+    - For example,
+        - Your Code ----> Web Service (you don't want to call real web service during unit testing)
+        - Unit tests should be fast
+        - Use mock to remove external resource to web service
+    - Exception - when code have complex logic and multiple execution paths
+        - ClassA.MethodA() ----> ClassB.MethodB()
+            - nether have external rosource
+            - if you test together, might have lots of tests across the execution paths
+            - in this case it's ok to Mock so you can test ClassA in isolation of ClassB and vice versa
+            - test ClassA then Mock for ClassB - to have fewer unit tests
+
     
 
