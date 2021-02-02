@@ -98,5 +98,11 @@ dependency injection - we inject dependency from the outside
             - in this case it's ok to Mock so you can test ClassA in isolation of ClassB and vice versa
             - test ClassA then Mock for ClassB - to have fewer unit tests
 
+Who should write tests?
+- Writing unit and integration tests is the job of a software developer
+- should write a suite of unit/integration tests for the code that YOU WROTE
+- in a team environment you should absolutely write your own unit/integration tests
+- end-to-end tests are written by testers
+
     
 
