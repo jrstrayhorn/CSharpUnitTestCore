@@ -60,4 +60,24 @@ dependency injection - we inject dependency from the outside
         - **Moq, NSubstitute, FakeItEasy, Rhino Mocks, - is the prefered one
         - Need to add Moq to unit testing project
 
+==State-based vs Interaction testing
+    - State-based testing 
+        - Assert that methods return the right thing or object in the right state
+        - by testing the state changes
+    - Interaction testing
+        - dealing with code that touch external resources
+        - we need to verify that class we're testing interacts with antoerh class correctly
+        - For example,
+            - PlaceOrder method in OrderService that needs to Store the order somewhere we don't care
+                _storage.Store(order);
+                database, cloud _storage
+            - one unit test, verify that orderService interacts with the Storage object properly
+            - so check that code calls the storage method of the Store object with the right argument (order object)
+        - only do this testing when dealing with EXTERNAL RESOURCES - file system, database, api call, etc
+        - interaction testing - starts to couple with implementation
+            - as you refactor and resturcute you might move stuff arounda nd break tests
+        - we should be testing the external behavior NOT THE IMPLEMENTATION (because that can change over time!!)
+    - prefer state-based, only use interaction when dealing with external resources
+
+    
 
