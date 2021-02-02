@@ -54,4 +54,10 @@ dependency injection - we inject dependency from the outside
     - inject / supply dependency from the outside
     - now class is loosely coupled and testable
 
+==Mocking Frameworks
+    - use these to setup your mocks/fake/stubs so each time you run time you can set the state that you need objects in
+    - Different Frameworks
+        - **Moq, NSubstitute, FakeItEasy, Rhino Mocks, - is the prefered one
+        - Need to add Moq to unit testing project
+
 
