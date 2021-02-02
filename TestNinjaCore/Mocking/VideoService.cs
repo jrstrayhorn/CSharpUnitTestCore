@@ -1,22 +1,22 @@
-using System.IO;
-using System.Text.Json;
 using Newtonsoft.Json;
 
 namespace TestNinjaCore.Mocking
 {
     public class VideoService
     {
-        public IFileReader FileReader { get; set; }
+        private IFileReader _fileReader;
 
-        public VideoService()
+        // default constructor for production
+        // can use for testing
+        public VideoService(IFileReader fileReader = null)
         {
-            FileReader = new FileReader();
+            _fileReader = fileReader ?? new FileReader();   // file reader not null use to set
         }
-        
+
         // DI via Method Parameters, can now choose implementation to use
         public string ReadVideoTitle()
         {
-            var str = FileReader.Read("video.txt");
+            var str = _fileReader.Read("video.txt");
             var video = JsonConvert.DeserializeObject<Video>(str);
             if (video == null)
                 return "Error parsing the video.";
