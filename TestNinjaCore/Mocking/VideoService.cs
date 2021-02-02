@@ -7,7 +7,8 @@ namespace TestNinjaCore.Mocking
     {
         public string ReadVideoTitle()
         {
-            var str = File.ReadAllText("video.txt");
+            // tightly coupled to FileReader - need to use interface
+            var str = new FileReader().Read("video.txt");
             var video = JsonSerializer.Deserialize<Video>(str);
             if (video == null)
                 return "Error parsing the video.";
