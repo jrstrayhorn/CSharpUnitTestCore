@@ -7,7 +7,7 @@ namespace TestNinjaCore.Mocking
             // in real world we don't manually new this up
             // we use DI framework that doesn't this for us!
             var service = new VideoService();
-            var title = service.ReadVideoTitle(new FileReader());
+            var title = service.ReadVideoTitle();
         }
     }
 }

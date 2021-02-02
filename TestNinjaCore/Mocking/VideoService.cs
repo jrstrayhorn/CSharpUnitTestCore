@@ -6,10 +6,17 @@ namespace TestNinjaCore.Mocking
 {
     public class VideoService
     {
-        // DI via Method Parameters, can now choose implementation to use
-        public string ReadVideoTitle(IFileReader fileReader)
+        public IFileReader FileReader { get; set; }
+
+        public VideoService()
         {
-            var str = fileReader.Read("video.txt");
+            FileReader = new FileReader();
+        }
+        
+        // DI via Method Parameters, can now choose implementation to use
+        public string ReadVideoTitle()
+        {
+            var str = FileReader.Read("video.txt");
             var video = JsonConvert.DeserializeObject<Video>(str);
             if (video == null)
                 return "Error parsing the video.";
