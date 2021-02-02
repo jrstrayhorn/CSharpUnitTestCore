@@ -1,0 +1,57 @@
+====Introduction
+
+- How to unit test class that depends on external resources
+- Unit tests should not touch external resources
+- if it does, that is an integration test
+- test the logic in a class while excluding dependency on external resources
+- principle
+    - have a video service class that uses File class, uses Dbcontext class
+    - extneral reousrce
+    - to unit test, need to do surgery to decouple VideoService from File class, DbContext class
+    - this way when unit test, can replace File class with another class that doesn't do anything
+    - fake/test double - class that doesn't do anything, replaces the dependent class
+    - how to do that surgery??
+
+===Loosely-coupled and Testable Code
+
+- Most legacy applications are built without unit testing... 
+- in order to unit test, have to refactor towards testable, Loosely coupled design
+- loosely coupled design is one where you can replace objects with another at run time
+- Object talk to external resources
+- can replace with test double
+- 3 Steps
+- 1. Extract code/logic that uses an external resource into a separate class
+    - isolate from rest of code
+- 2. Extract an interface from that code (a contract)
+    - simply tell that another class implements that contract   
+    - IFileReader -> FileReader / FakeFileReader
+- 3. Modify the class under test to use the interface instead of concrete implementation
+    - will depend on interface only
+- now class is loosely coupled and tested
+- In practice that means we should remove instances in the code where we use the new operator
+- Example
+public void MyMethod()
+{
+    // when you use new you are making your class tightly coupled to a given implementation
+    // no way to replace with a fake object
+    var reader = new FileReader(); // should remove this!!
+    reader.Read();
+}
+
+// one way to do this is to pass in the dependecy as a parameter to the method
+// or in the constructor via dependency injection
+public void MyMethod(IFileReader reader)
+{
+    reader.Read();
+}
+
+not can provide a different implementation
+
+Production code - real implementation
+Test code - fake implementation
+
+dependency injection - we inject dependency from the outside
+    - inject / supply dependency from the outside
+    - now class is loosely coupled and testable
+
+
