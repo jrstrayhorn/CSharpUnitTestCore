@@ -54,13 +54,25 @@ namespace TestNinjaCore.UnitTests
         }
 
         [Test]
-        public void Pop_WhenCalled_ShouldReturnLastItemInStackAndRemoveIt()
+        public void Pop_WhenCalled_ShouldReturnObjectOnTheTop()
         { 
-            _stack.Push("test");
+            _stack.Push("a");
+            _stack.Push("b");
+            _stack.Push("c");
             var item = _stack.Pop();
 
-            Assert.That(item, Is.EqualTo("test"));
-            Assert.That(_stack.Count, Is.EqualTo(0));
+            Assert.That(item, Is.EqualTo("c"));
+        }
+
+        [Test]
+        public void Pop_WhenCalled_ShouldRemoveLastItem()
+        { 
+            _stack.Push("a");
+            _stack.Push("b");
+            _stack.Push("c");
+            var item = _stack.Pop();
+
+            Assert.That(_stack.Count, Is.EqualTo(2));
         }
 
         [Test]
@@ -70,13 +82,25 @@ namespace TestNinjaCore.UnitTests
         }
 
         [Test]
-        public void Peek_WhenCalled_ShouldReturnLastItemInStackWithoutRemoving()
+        public void Peek_WhenCalled_ShouldReturnObjectOnTopOfTheStack()
         { 
-            _stack.Push("test");
+            _stack.Push("a");
+            _stack.Push("b");
+            _stack.Push("c");
             var item = _stack.Peek();
 
-            Assert.That(item, Is.EqualTo("test"));
-            Assert.That(_stack.Count, Is.EqualTo(1));
+            Assert.That(item, Is.EqualTo("c"));
+        }
+
+        [Test]
+        public void Peek_WhenCalled_DoesNotRemoveTheObjectOnTopOfTheStack()
+        { 
+            _stack.Push("a");
+            _stack.Push("b");
+            _stack.Push("c");
+            var item = _stack.Peek();
+
+            Assert.That(_stack.Count, Is.EqualTo(3));
         }
     }
 }
