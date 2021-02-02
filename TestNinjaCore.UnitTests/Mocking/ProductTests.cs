@@ -17,6 +17,7 @@ namespace TestNinjaCore.UnitTests.Mocking
             Assert.That(result, Is.EqualTo(70));
         }
 
+        // dont do this, the above test, is simpler and cleaner
         [Test]
         public void GetPrice_GoldCustomer_Apply30PercentDiscount2()
         {
