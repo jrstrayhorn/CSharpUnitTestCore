@@ -1,11 +1,13 @@
 using Moq;
 using NUnit.Framework;
 using TestNinjaCore.Mocking;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace TestNinjaCore.UnitTests.Mocking
 {
     [TestFixture]
-    public class BookingHelperTests
+    public class BookingHelper_OverlappingBookingsExist_Tests
     {
         private Mock<IBookingRepository> _repository;
 
@@ -13,6 +15,30 @@ namespace TestNinjaCore.UnitTests.Mocking
         public void SetUp()
         {
             _repository = new Mock<IBookingRepository>();
+        }
+
+        [Test]
+        public void BookingStartsAndFinishesBeforeAnExistingBooking_ReturnEmptyString()
+        {
+            _repository.Setup(r => r.GetActiveBookings(1)).Returns(new List<Booking>
+                {
+                    new Booking
+                    {
+                        Id = 2,
+                        ArrivalDate = new System.DateTime(2017, 1, 15, 14, 0, 0),
+                        DepartureDate = new System.DateTime(2017, 1, 20, 10, 0, 0),
+                        Reference = "a"
+                    }
+                }.AsQueryable());
+            
+            var result = BookingHelper.OverlappingBookingsExist(new Booking
+            {
+                Id = 1,
+                ArrivalDate = new System.DateTime(2017, 1, 10, 14, 0, 0),
+                DepartureDate = new System.DateTime(2017, 1, 14, 10, 0, 0),
+            }, _repository.Object);
+
+            Assert.That(result, Is.Empty);
         }
 
         [Test]

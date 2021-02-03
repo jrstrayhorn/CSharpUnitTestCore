@@ -8,6 +8,7 @@ namespace TestNinjaCore.Mocking
     {
         // ah.. this is static, should we switch to non static
         // because of the depenency.. right now need to pass in method...
+        // will assume DI framework can do method injection
         // private readonly IBookingRepository _repository;
 
         // public BookingHelper(IBookingRepository repository)
@@ -25,7 +26,16 @@ namespace TestNinjaCore.Mocking
             if (booking.Status == "Cancelled")
                 return string.Empty;
 
-            var overlappingBooking = repository.GetOverlappingBooking(booking);
+            var bookings = repository.GetActiveBookings(booking.Id);
+
+            // this query is SPECIFIC to this method so should be here
+            // once we have active bookings we can see if there is an overlap
+            var overlappingBooking = bookings.FirstOrDefault(
+                    b =>
+                        booking.ArrivalDate >= b.ArrivalDate
+                        && booking.ArrivalDate < b.DepartureDate
+                        || booking.DepartureDate > b.ArrivalDate
+                        && booking.DepartureDate <= b.DepartureDate);
 
             return overlappingBooking == null ? string.Empty : overlappingBooking.Reference;
         }
