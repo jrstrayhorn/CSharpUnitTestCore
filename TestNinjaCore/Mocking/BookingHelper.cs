@@ -30,6 +30,8 @@ namespace TestNinjaCore.Mocking
 
             // this query is SPECIFIC to this method so should be here
             // once we have active bookings we can see if there is an overlap
+            // also we want to test the logic in this query that is against
+            // objects in memory not going against a database
             var overlappingBooking = bookings.FirstOrDefault(
                     b =>
                         booking.ArrivalDate >= b.ArrivalDate
