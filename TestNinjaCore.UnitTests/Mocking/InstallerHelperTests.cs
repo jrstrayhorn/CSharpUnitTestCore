@@ -19,8 +19,9 @@ namespace TestNinjaCore.UnitTests.Mocking
         }
 
         [Test]
-        public void DownloadInstaller_DownloadSuccessful_ShouldReturnTrue()
+        public void DownloadInstaller_DownloadSuccessful_ReturnTrue()
         {
+            // no need to mock method because it doesn't return anything
             //_fileDownloader.Setup(fd => fd.DownloadFile("", ""));
 
             var result = _installerHelper.DownloadInstaller("test", "test");
@@ -29,15 +30,21 @@ namespace TestNinjaCore.UnitTests.Mocking
         }
 
         [Test]
-        public void DownloadInstaller_DownloadFailed_ShouldReturnFalse()
+        public void DownloadInstaller_DownloadFailed_ReturnFalse()
         { 
-            _fileDownloader.Setup(fd => fd.DownloadFile("http://example.com/test/test", null)).Throws<WebException>();
+            //_fileDownloader.Setup(fd => fd.DownloadFile("http://example.com/customer/installer", null)).Throws<WebException>();
+            // NOW the mock is more generic!!
+            _fileDownloader.Setup(fd => 
+                fd.DownloadFile(It.IsAny<string>(), It.IsAny<string>()))
+                .Throws<WebException>();
 
-            var result = _installerHelper.DownloadInstaller("test", "test");
+            var result = _installerHelper.DownloadInstaller("customer", "installer");
 
-            Assert.That(result, Is.EqualTo(false));
+            Assert.That(result, Is.False);
         }
 
+        // this test is too specific - so be careful with this one
+        // if api paths change any of these types of tests will break
         [Test]
         public void DownloadInstaller_WithCustomerInstallerName_ShouldUseCorrectUrl()
         { 

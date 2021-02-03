@@ -19,6 +19,10 @@ namespace TestNinjaCore.Mocking
         {
             try
             {
+                // this class should be responsible for constructing the correct url
+                // because it knows about customerName, installerName
+                // it's a higher level class that knows about business domain
+                // BUT it'd delegating the task to download to fileDownloader
                 _fileDownloader.DownloadFile(string.Format("http://example.com/{0}/{1}",
                         customerName,
                         installerName),
@@ -28,6 +32,8 @@ namespace TestNinjaCore.Mocking
             }
             catch (WebException)
             {
+                // we want to catch this specific error
+                // any other exceptions we want to propagate to our logger
                 return false;
             }
         }
