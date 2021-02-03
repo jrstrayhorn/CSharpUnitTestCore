@@ -26,6 +26,12 @@ namespace TestNinjaCore.Mocking
         // DI via Method Parameters, can now choose implementation to use
         public string ReadVideoTitle()
         {
+            // fileReader only used here
+            // so we could pass as a parameter to this method
+            // string ReadVideoTitle(IFileReader)
+            // that way we won't end up with bulky constructor
+            // but depends on the DI framework you're using in terms
+            // of how it resolves dependency method vs constructor or both
             var str = _fileReader.Read("video.txt");
             var video = JsonConvert.DeserializeObject<Video>(str);
             if (video == null)

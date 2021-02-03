@@ -17,6 +17,13 @@ namespace TestNinjaCore.UnitTests.Mocking
         {
             _fileReader = new Mock<IFileReader>();
             _videoRepository = new Mock<IVideoRepository>();
+            // if you have too many dependencies, mmight be a code smell that the class is doing too many things
+            // some of those methods belong to a different class.. those extra dependencies would go away
+            // or if you're trying to mock everything.. we should only mock external dependencies
+            // or if class has really complex logic so need to bring out into more dependencies
+            // to make testing easier
+            // if dependency is only used for one method, its better to pass that
+            // dependency as a parameter to that method
             _videoService = new VideoService(_fileReader.Object, _videoRepository.Object);
         }
 
@@ -34,8 +41,9 @@ namespace TestNinjaCore.UnitTests.Mocking
         [Test]
         public void GetUnprocessedVideos_NoVideos_ReturnEmptyString()
         { 
-            var videos = new List<Video>();
-            _videoRepository.Setup(vr => vr.GetUnprocessedVideos()).Returns(videos);
+            _videoRepository
+                .Setup(vr => vr.GetUnprocessedVideos())
+                .Returns(new List<Video>());
 
             var csv = _videoService.GetUnprocessedVideosAsCsv();
             
@@ -45,9 +53,12 @@ namespace TestNinjaCore.UnitTests.Mocking
         [Test]
         public void GetUnprocessedVideos_OneVideo_ReturnStringWithoutComma()
         { 
-            var videos = new List<Video>();
-            videos.Add(new Video { Id = 1}); 
-            _videoRepository.Setup(vr => vr.GetUnprocessedVideos()).Returns(videos);
+            _videoRepository
+                .Setup(vr => vr.GetUnprocessedVideos())
+                .Returns(new List<Video> 
+                    {
+                        new Video { Id = 1}
+                    });
 
             var csv = _videoService.GetUnprocessedVideosAsCsv();
             
@@ -57,11 +68,14 @@ namespace TestNinjaCore.UnitTests.Mocking
         [Test]
         public void GetUnprocessedVideos_WithVideos_ReturnCommaSeparatedString()
         {
-            var videos = new List<Video>();
-            videos.Add(new Video { Id = 1}); 
-            videos.Add(new Video { Id = 2}); 
-            videos.Add(new Video { Id = 3}); 
-            _videoRepository.Setup(vr => vr.GetUnprocessedVideos()).Returns(videos);
+            _videoRepository
+                .Setup(vr => vr.GetUnprocessedVideos())
+                .Returns(new List<Video> 
+                    {
+                        new Video { Id = 1},
+                        new Video { Id = 2},
+                        new Video { Id = 3}
+                    });
 
             var csv = _videoService.GetUnprocessedVideosAsCsv();
             
