@@ -11,6 +11,8 @@ namespace TestNinjaCore.Mocking
     {
         // we are encapsulating this query
         // we should cover this logic with integration test BEFORE refactoring it
+        // existing cancelled booking should not be returned
+        // this would be an integration test against database
         public IQueryable<Booking> GetActiveBookings(int? excludedBookingId = null)
         {
             var unitOfWork = new UnitOfWork();
