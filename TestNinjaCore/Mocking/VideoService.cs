@@ -1,10 +1,15 @@
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Linq;
+using System;
 
 namespace TestNinjaCore.Mocking
 {
     public class VideoService
     {
         private IFileReader _fileReader;
+        private IVideoRepository _videoRepository;
 
         // default constructor for production
         // can use for testing
@@ -12,9 +17,10 @@ namespace TestNinjaCore.Mocking
         // **Ninject, StructureMap, **Autofac, Springg.Net, Unity - **recommended
         // DI Framework sets up a container with Interface/Implementation
         // will create object graph based on registry in container
-        public VideoService(IFileReader fileReader = null)
+        public VideoService(IFileReader fileReader = null, IVideoRepository videoRepository = null)
         {
             _fileReader = fileReader ?? new FileReader();   // file reader not null use to set
+            _videoRepository = videoRepository ?? new VideoRepository();
         }
 
         // DI via Method Parameters, can now choose implementation to use
@@ -26,6 +32,18 @@ namespace TestNinjaCore.Mocking
                 return "Error parsing the video.";
             return video.Title;
         }
+
+        public string GetUnprocessedVideosAsCsv()
+        {
+            var videoIds = new List<int>();
+
+            var videos = _videoRepository.GetUnprocessedVideos();
+            
+            foreach (var v in videos)
+                videoIds.Add(v.Id);
+
+            return String.Join(",", videoIds);
+        }
     }
 
     public class Video
@@ -33,5 +51,10 @@ namespace TestNinjaCore.Mocking
         public int Id { get; set; }
         public string Title { get; set; }
         public bool IsProcessed { get; set; }
+    }
+
+    public class VideoContext : DbContext
+    {
+        public DbSet<Video> Videos { get; set; }
     }
 }
