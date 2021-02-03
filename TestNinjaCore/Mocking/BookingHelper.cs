@@ -6,24 +6,26 @@ namespace TestNinjaCore.Mocking
 {
     public static class BookingHelper
     {
-        public static string OverlappingBookingsExist(Booking booking)
+        // ah.. this is static, should we switch to non static
+        // because of the depenency.. right now need to pass in method...
+        // private readonly IBookingRepository _repository;
+
+        // public BookingHelper(IBookingRepository repository)
+        // {
+        //     this._repository = repository;
+        // }
+
+        // what tests?
+        // if booking is null? - should return empty string - this is currently a bug
+        // when booking is cancelled, should return empty string
+        // when no overlapping bookings return empty string
+        // when overlapping bookings return booking reference
+        public static string OverlappingBookingsExist(Booking booking, IBookingRepository repository)
         {
             if (booking.Status == "Cancelled")
                 return string.Empty;
 
-            var unitOfWork = new UnitOfWork();
-            var bookings =
-                unitOfWork.Query<Booking>()
-                    .Where(
-                        b => b.Id != booking.Id && b.Status != "Cancelled");
-
-            var overlappingBooking =
-                bookings.FirstOrDefault(
-                    b =>
-                        booking.ArrivalDate >= b.ArrivalDate
-                        && booking.ArrivalDate < b.DepartureDate
-                        || booking.DepartureDate > b.ArrivalDate
-                        && booking.DepartureDate <= b.DepartureDate);
+            var overlappingBooking = repository.GetOverlappingBooking(booking);
 
             return overlappingBooking == null ? string.Empty : overlappingBooking.Reference;
         }
