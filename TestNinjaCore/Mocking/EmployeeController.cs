@@ -4,16 +4,22 @@ namespace TestNinjaCore.Mocking
 {
     public class EmployeeController
     {
-        private readonly IEmployeeStorage _employeeStorage;
+        private readonly IEmployeeStorage _storage;
 
-        public EmployeeController(IEmployeeStorage employeeStorage)
+        public EmployeeController(IEmployeeStorage storage)
         {
-            _employeeStorage = employeeStorage;
+            _storage = storage;
         }
 
         public ActionResult DeleteEmployee(int id)
         {
-            _employeeStorage.Remove(id);
+            _storage.DeleteEmployee(id);
+            // since this is a private method we don't want to test this
+            // this is an implementation detail that might change in the future
+            // so we don't want to test if this exact method is being called
+            // just that the expected return value is returned correctly
+            // in the future we might directly return the object and not
+            // call the method which would break the test
             return RedirectToAction("Employees");
         }
 

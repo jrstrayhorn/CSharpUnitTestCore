@@ -8,13 +8,12 @@ namespace TestNinjaCore.UnitTests.Mocking
     public class EmployeeControllerTests
     {
         private EmployeeController _employeeController;
-        private Mock<IEmployeeStorage> _employeeStorage;
+        private Mock<IEmployeeStorage> _storage;
 
         [SetUp]
         public void SetUp()
         {
-            _employeeStorage = new Mock<IEmployeeStorage>();
-            _employeeController = new EmployeeController(_employeeStorage.Object);
+            _employeeController = new EmployeeController(_storage.Object);
         }
 
         [Test]
@@ -28,7 +27,7 @@ namespace TestNinjaCore.UnitTests.Mocking
         public void DeleteEmployee_WhenCalled_ShouldRemoveEmployee()
         {
             _employeeController.DeleteEmployee(1);
-            _employeeStorage.Verify(es => es.Remove(1));
+            _storage.Verify(es => es.DeleteEmployee(1));
         }
     }
 }
