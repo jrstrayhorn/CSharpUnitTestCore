@@ -29,8 +29,16 @@ namespace TestNinjaCore.Mocking
         // what should the tests be?
         // for given statementDate if there are statements to send, should send them return true
         // if error during send of email, throws exception
-        // what s
-        public bool SendStatementEmails(DateTime statementDate)
+        // what should we test?
+        // should always test the outcome of a method
+        // 2 types of functions - query - return a value and command - carry out a task return value
+        // what type of function is it?
+        // it's a command that is also returning a boolean
+        // main thing is a command
+        // but also a query returning boolean
+        // so we should test that it returns the right things under right scenarios - query (state)
+        // should also test that the right things get called - command (interaction)
+        public void SendStatementEmails(DateTime statementDate)
         {
             // repository - external dep - don't want to run during test - use repository
             // refactored to IUnitOfWork
@@ -63,8 +71,6 @@ namespace TestNinjaCore.Mocking
                         MessageBoxButtons.OK);
                 }
             }
-
-            return true;
         }
 
 
