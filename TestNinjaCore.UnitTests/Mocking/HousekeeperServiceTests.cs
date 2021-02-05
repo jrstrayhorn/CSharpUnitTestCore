@@ -82,6 +82,24 @@ namespace TestNinjaCore.UnitTests.Mocking
             VerifyEmailSent();
         }
 
+        [Test]
+        public void SendStatementEmails_EmailSendingFails_DisplayAMessageBox()
+        {
+            // we don't care about passing the "right" values here
+            // because we've already test happy path that works under normal circumstances
+            _emailSender.Setup(es => es.EmailFile(
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string>()
+            )).Throws<Exception>();
+
+            _service.SendStatementEmails(_statementDate);
+            
+            // don't test for exact strings in message box as they may change in the future
+            _messageBox.Verify(mb => mb.Show(It.IsAny<string>(), It.IsAny<string>(), MessageBoxButtons.OK));
+        }
+
         
 
         // negative - change setup that will deviate from happy path
