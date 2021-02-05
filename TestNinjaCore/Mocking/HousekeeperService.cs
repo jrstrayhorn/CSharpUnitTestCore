@@ -6,14 +6,25 @@ using System.Text;
 
 namespace TestNinjaCore.Mocking
 {
-    public class HousekeeperHelper
+    public class HousekeeperService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IStatementGenerator _statementGenerator;
         private readonly IEmailSender _emailSender;
         private readonly IXtraMessageBox _messageBox;
 
-        public HousekeeperHelper(
+        // this is a perfect candiate for an application service because it's dealing with
+        // high level orchestration of tasks
+        // query housekeepers
+        // generate statements
+        // send email
+        // show messagebox
+        // definitely a high level service, delegating responsiblity to other objects
+
+        // before the refactor this was a FAT class that was doing too many things - queryDB, email, generate statement
+        // all of which was implemented with a private static method
+        // now that we've refactored for testability - we have better separation of concerns
+        public HousekeeperService(
             IUnitOfWork unitOfWork, 
             IStatementGenerator statementGenerator, 
             IEmailSender emailSender,
