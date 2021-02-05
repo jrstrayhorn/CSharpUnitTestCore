@@ -57,7 +57,7 @@ namespace TestNinjaCore.Mocking
 
             foreach (var housekeeper in housekeepers)
             {
-                if (housekeeper.Email == null)
+                if (String.IsNullOrWhiteSpace(housekeeper.Email))
                     continue;
 
                 // storage - external dep - don't want to run during test
@@ -83,10 +83,6 @@ namespace TestNinjaCore.Mocking
                 }
             }
         }
-
-
-
-        
     }
 
     public enum MessageBoxButtons

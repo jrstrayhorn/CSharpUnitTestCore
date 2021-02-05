@@ -47,5 +47,20 @@ namespace TestNinjaCore.UnitTests.Mocking
             _statementGenerator.Verify(sg => 
                 sg.SaveStatement(_housekeeper.Oid, _housekeeper.FullName, _statementDate));
         }
+
+        [Test]
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" ")]
+        public void SendStatementEmails_HouseKeepersEmailIsNullEmptyOrWhitespace_ShouldNotGenerateStatement(string email)
+        {
+            _housekeeper.Email = email;
+
+            _service.SendStatementEmails(_statementDate);
+
+            _statementGenerator.Verify(sg => 
+                sg.SaveStatement(_housekeeper.Oid, _housekeeper.FullName, _statementDate),
+                Times.Never);
+        }
     }
 }
