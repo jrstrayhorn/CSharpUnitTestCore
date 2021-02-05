@@ -30,7 +30,7 @@ namespace TestNinjaCore.Mocking
 
             // this query is SPECIFIC to this method so should be here
             // once we have active bookings we can see if there is an overlap
-            // also we want to test the logic in this query that is against
+            // also we want to unit test the logic in this query that is against
             // objects in memory not going against a database
             var overlappingBooking = bookings.FirstOrDefault(
                     b =>
@@ -41,7 +41,12 @@ namespace TestNinjaCore.Mocking
         }
     }
 
-    public class UnitOfWork
+    public interface IUnitOfWork
+    {
+        IQueryable<T> Query<T>();
+    }
+
+    public class UnitOfWork : IUnitOfWork
     {
         public IQueryable<T> Query<T>()
         {
